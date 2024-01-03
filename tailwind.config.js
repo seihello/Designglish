@@ -10,7 +10,12 @@ module.exports = {
         },
         destructive: "#ff0000",
         background: "#FFFFFF"
-      }
+      },
+      fontFamily: {
+        roboto: ["Roboto"],
+        "roboto-bold": ["RobotoBold"],
+        caveat: ["Caveat"],
+      },
     }
   },
   plugins: [],
