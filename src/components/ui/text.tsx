@@ -2,6 +2,8 @@ import { Text as ReactNativeText } from "react-native";
 
 export default function Text(props: any) {
   const { ...rest } = props;
-  
-  return <ReactNativeText className={"font-roboto"} {...rest}></ReactNativeText>
+
+  return (
+    <ReactNativeText className={"font-roboto"} {...rest}></ReactNativeText>
+  );
 }

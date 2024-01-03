@@ -1,6 +1,6 @@
+import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
-import { useFonts } from "expo-font";
 import HomePage from "./src/home";
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
   if (!fontsLoaded) return null;
 
   return (
-    <View className="w-screen pt-16 px-4 bg-primary-light" style={{}}>
+    <View className="w-screen bg-primary-light px-4 pt-16" style={{}}>
       <HomePage />
       <StatusBar style="auto" />
     </View>
