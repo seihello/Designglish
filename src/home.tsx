@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Text from "./components/ui/text";
+import { supabase } from "./lib/supabase";
 
 export default function HomePage() {
+  useEffect(() => {
+    const getData = async () => {
+      const { data, error } = await supabase.from("words").select("title");
+      if (data) {
+        data.map((word: any) => {
+          console.log(word.title);
+        });
+      }
+    };
+
+    getData();
+  }, []);
+
   return (
     <View className="h-1/2 w-full">
       <View className="flex flex-row items-center justify-between px-8 py-2">
