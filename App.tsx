@@ -19,7 +19,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="word">
+      <Stack.Navigator initialRouteName="home">
         <Stack.Screen name="home" component={HomePage} />
         <Stack.Screen name="word" component={WordPage} />
       </Stack.Navigator>
