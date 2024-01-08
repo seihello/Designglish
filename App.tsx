@@ -1,7 +1,12 @@
 import { useFonts } from "expo-font";
-import { StatusBar } from "expo-status-bar";
-import { View } from "react-native";
+// import { StatusBar } from "expo-status-bar";
+// import { View } from "react-native";
+import WordPage from "./src/word";
 import HomePage from "./src/home";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -13,9 +18,11 @@ export default function App() {
   if (!fontsLoaded) return null;
 
   return (
-    <View className="w-screen bg-primary-light px-4 pt-16" style={{}}>
-      <HomePage />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="home">
+        <Stack.Screen name="home" component={HomePage} />
+        <Stack.Screen name="word" component={WordPage} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
