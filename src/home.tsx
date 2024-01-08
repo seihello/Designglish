@@ -2,6 +2,7 @@ import React from "react";
 import { Image, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Text from "./components/ui/text";
+import HomeMainPanel from "./components/home/main-panel";
 
 export default function HomePage(props: any) {
   return (
@@ -27,6 +28,7 @@ export default function HomePage(props: any) {
           </Text>
         </View>
       </View>
+      <HomeMainPanel />
     </View>
   );
 }
