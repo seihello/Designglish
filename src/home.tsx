@@ -28,7 +28,7 @@ export default function HomePage(props: any) {
           </Text>
         </View>
       </View>
-      <HomeMainPanel />
+      <HomeMainPanel navigation={props.navigation} />
     </View>
   );
 }
