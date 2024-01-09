@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
+import ProgressType from "../enums/progress-type";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
+import ProgressBar from "./components/word/progress-bar";
 import { supabase } from "./lib/supabase";
 
 type Word = {
@@ -37,15 +39,10 @@ export default function WordPage({ navigation }: any) {
           className="mt-8"
         />
       </View>
-      <View className="relative px-8">
-        <View className="flex w-1/2 flex-col">
-          <Text className="font-dm-bold text-[32px] text-white">
-            Welcome, Lisa!
-          </Text>
-          <Text className="font-dm-bold text-lg text-white">
-            What do you want to learn today?
-          </Text>
-        </View>
+      <View className="flex flex-col">
+        <ProgressBar type={ProgressType.Mastered} total={50} count={25} />
+        <ProgressBar type={ProgressType.Reviewing} total={50} count={17} />
+        <ProgressBar type={ProgressType.Learning} total={50} count={8} />
       </View>
     </View>
   );
