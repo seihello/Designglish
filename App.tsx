@@ -12,6 +12,8 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     Roboto: require("./assets/fonts/Roboto-Regular.ttf"),
     RobotoBold: require("./assets/fonts/Roboto-Bold.ttf"),
+    DMSans: require("./assets/fonts/DMSans-Regular.ttf"),
+    DMSansBold: require("./assets/fonts/DMSans-Bold.ttf"),
     Caveat: require("./assets/fonts/Caveat-VariableFont_wght.ttf"),
   });
 
@@ -19,9 +21,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="home">
-        <Stack.Screen name="home" component={HomePage} />
-        <Stack.Screen name="word" component={WordPage} />
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen name="Word" component={WordPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

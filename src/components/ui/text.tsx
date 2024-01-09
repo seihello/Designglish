@@ -4,6 +4,6 @@ export default function Text(props: any) {
   const { ...rest } = props;
 
   return (
-    <ReactNativeText className={"font-roboto"} {...rest}></ReactNativeText>
+    <ReactNativeText className={"font-dm"} {...rest}></ReactNativeText>
   );
 }

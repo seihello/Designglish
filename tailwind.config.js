@@ -9,15 +9,16 @@ module.exports = {
           main: "#239CAC",
         },
         destructive: "#ff0000",
-        background: "#FFFFFF"
+        background: "#FFFFFF",
       },
       fontFamily: {
         roboto: ["Roboto"],
         "roboto-bold": ["RobotoBold"],
+        dm: ["DMSans"],
+        "dm-bold": ["DMSansBold"],
         caveat: ["Caveat"],
       },
-    }
+    },
   },
   plugins: [],
-}
-
+};
