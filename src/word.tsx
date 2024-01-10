@@ -9,7 +9,19 @@ import Word from "./types/word.type";
 
 export default function WordPage({ navigation }: any) {
   const [words, setWords] = useState<Word[]>([]);
-  const [isTitleSide, setIsTitleSide] = useState(false);
+  const [isTitleSide, setIsTitleSide] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const toNext = () => {
+    setActiveIndex((prev: number) => {
+      return prev < words.length - 1 ? prev + 1 : prev;
+    })
+    setIsTitleSide(true);
+  }
+
+  const showMeaning = () => {
+    setIsTitleSide(false);
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -22,17 +34,21 @@ export default function WordPage({ navigation }: any) {
     getData();
   }, []);
 
+  console.log("index", activeIndex);
+  console.log("isTitleSide", isTitleSide);
+  
+
   if (words.length === 0) return;
-  const word = words[0];
+  const word = words[activeIndex];
 
   return (
     <View className="flex h-screen w-full flex-col px-4 py-8" style={{
       backgroundColor: isTitleSide ? "white" : "#F1FBFB"
     }}>
       {isTitleSide ? (
-        <WordTitleSide word={word} />
+        <WordTitleSide word={word} showMeaning={showMeaning} />
       ) : (
-        <WordMeaningSide word={word} />
+        <WordMeaningSide word={word} toNext={toNext} />
       )}
       <View className="flex flex-col">
         <ProgressBar type={ProgressType.Mastered} total={50} count={25} />
