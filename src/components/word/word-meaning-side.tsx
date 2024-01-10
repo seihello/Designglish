@@ -40,6 +40,17 @@ export default function WordMeaningSide({ word, toNext }: Props) {
         </View>
       </View>
 
+      <View className="flex flex-col gap-y-2">
+        <Text className="w-full text-left font-dm-bold text-base text-gray-600">
+          Example
+        </Text>
+        {word.sentences.map((sentence: string, index: number) => (
+          <Text key={index} className="font-roboto text-gray-600">
+            {sentence}
+          </Text>
+        ))}
+      </View>
+
       <View className="flex w-full flex-col gap-y-4">
         <Button
           title="I knew this word"

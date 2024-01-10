@@ -25,18 +25,19 @@ export default function WordPage({ navigation }: any) {
 
   useEffect(() => {
     const getData = async () => {
-      const { data, error } = await supabase.from("words").select("*");
+      const { data, error } = await supabase.from("words").select("*, sentences(sentence)");
       if (data) {
-        setWords(data);
+        setWords(() => {
+          return data.map((row) => {
+            const sentences = row.sentences.map((sentence: any) => sentence.sentence)
+            return { ...row, sentences }
+          });
+        });
       }
     };
 
     getData();
   }, []);
-
-  console.log("index", activeIndex);
-  console.log("isTitleSide", isTitleSide);
-  
 
   if (words.length === 0) return;
   const word = words[activeIndex];
