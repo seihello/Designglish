@@ -8,7 +8,15 @@ module.exports = {
           light: "#F1FBFB",
           main: "#239CAC",
         },
-        destructive: "#ff0000",
+        yellow: {
+          light: "#F2EBC4",
+          main: "#9E8E00",
+        },
+        red: {
+          light: "#FFEEEF",
+          main: "#DD224F",
+        },
+        destructive: "#DD224F",
         background: "#FFFFFF",
       },
       fontFamily: {
