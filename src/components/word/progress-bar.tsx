@@ -23,7 +23,7 @@ export default function ProgressBar({ type, total, count }: Props) {
     <View className="mt-4">
       <View className="flex flex-row justify-between">
         <Text className="font-roboto text-xs text-gray-600">{`${count}/${total} ${type.toString()}`}</Text>
-        <Text className="text-xs text-gray-600">{`${Math.round(
+        <Text className="font-roboto text-xs text-gray-600">{`${Math.round(
           (count / total) * 100,
         )}%`}</Text>
       </View>

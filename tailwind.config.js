@@ -22,6 +22,8 @@ module.exports = {
       fontFamily: {
         roboto: ["Roboto"],
         "roboto-bold": ["RobotoBold"],
+        "roboto-italic": ["RobotoItalic"],
+        "roboto-bold-italic": ["RobotoBoldItalic"],
         dm: ["DMSans"],
         "dm-bold": ["DMSansBold"],
         caveat: ["Caveat"],
