@@ -1,13 +1,20 @@
 import React from "react";
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 import Text from "./text";
 
-export default function Button({ title, onPress, ...rest }: any) {
+type Props = {
+  title: string;
+  onPress: () => void;
+  className?: string;
+};
+
+export default function Button({ title, onPress, className, ...rest }: Props) {
+
   return (
-    <TouchableHighlight
-      className="flex w-full items-center justify-center rounded-full bg-primary-main py-2 active:bg-primary-light"
+    <TouchableOpacity
       onPress={onPress}
-      underlayColor="#56b0bc"
+      className={"flex w-full items-center justify-center rounded-full py-2".concat(className || "")}
+      activeOpacity={0.8}
       {...rest}
     >
       <Text
@@ -17,6 +24,6 @@ export default function Button({ title, onPress, ...rest }: any) {
       >
         {title}
       </Text>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
