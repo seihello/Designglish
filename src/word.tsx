@@ -4,7 +4,7 @@ import ProgressType from "../enums/progress-type";
 import ProgressBar from "./components/word/progress-bar";
 import WordMeaningSide from "./components/word/word-meaning-side";
 import WordTitleSide from "./components/word/word-title-side";
-import { supabase } from "./lib/supabase";
+import getCourseWords from "./lib/progress/get-course-words";
 import Word from "./types/word.type";
 
 export default function WordPage({ navigation }: any) {
@@ -32,18 +32,11 @@ export default function WordPage({ navigation }: any) {
 
   useEffect(() => {
     const getData = async () => {
-      const { data, error } = await supabase
-        .from("words")
-        .select("*, sentences(sentence)");
-      if (data) {
-        setWords(() => {
-          return data.map((row) => {
-            const sentences = row.sentences.map(
-              (sentence: any) => sentence.sentence,
-            );
-            return { ...row, sentences };
-          });
-        });
+      try {
+        const words = await getCourseWords();
+        setWords(words);
+      } catch (error) {
+        console.error(error);
       }
     };
 
