@@ -4,15 +4,23 @@ import Word from "../../types/word.type";
 import Button from "../ui/button";
 import Chip from "../ui/chip";
 import Text from "../ui/text";
+import Progress from "../../enum/progress.enum";
 
 type Props = {
   word: Word;
+  updateProgress: (wordId: number, progress: Progress) => Promise<void>
   toNext: () => void;
 };
 
 const synonyms = ["prompt", "gentle persuasion", "subtle encouragement"];
 
-export default function WordMeaningSide({ word, toNext }: Props) {
+export default function WordMeaningSide({ word, updateProgress, toNext }: Props) {
+
+  const onPressedKnown = async () => {
+    await updateProgress(word.id, Progress.Mastered);
+    toNext();
+  }
+
   return (
     <View className="items-between flex flex-col gap-y-4 rounded-2xl border-[1px] border-gray-200 bg-white px-8 pb-8 pt-4">
       <View className="flex flex-col items-center">
@@ -54,10 +62,7 @@ export default function WordMeaningSide({ word, toNext }: Props) {
       <View className="flex w-full flex-col gap-y-4">
         <Button
           title="I knew this word"
-          onPress={() => {
-            console.log("pressed!");
-            toNext();
-          }}
+          onPress={onPressedKnown}
           className="bg-primary-main"
         />
         <Button
