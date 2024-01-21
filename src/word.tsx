@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import ProgressType from "../enums/progress-type";
 import ProgressBar from "./components/word/progress-bar";
-import WordTitleSide from "./components/word/word-title-side";
 import WordMeaningSide from "./components/word/word-meaning-side";
+import WordTitleSide from "./components/word/word-title-side";
 import { supabase } from "./lib/supabase";
 import Word from "./types/word.type";
 
@@ -13,24 +13,35 @@ export default function WordPage({ navigation }: any) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const toNext = () => {
-    setActiveIndex((prev: number) => {
-      return prev < words.length - 1 ? prev + 1 : prev;
-    })
+    const finishCourse = () => {
+      navigation.push("Home");
+    };
+
+    if (activeIndex < words.length - 1) {
+      setActiveIndex(activeIndex + 1);
+    } else {
+      finishCourse();
+    }
+
     setIsTitleSide(true);
-  }
+  };
 
   const showMeaning = () => {
     setIsTitleSide(false);
-  }
+  };
 
   useEffect(() => {
     const getData = async () => {
-      const { data, error } = await supabase.from("words").select("*, sentences(sentence)");
+      const { data, error } = await supabase
+        .from("words")
+        .select("*, sentences(sentence)");
       if (data) {
         setWords(() => {
           return data.map((row) => {
-            const sentences = row.sentences.map((sentence: any) => sentence.sentence)
-            return { ...row, sentences }
+            const sentences = row.sentences.map(
+              (sentence: any) => sentence.sentence,
+            );
+            return { ...row, sentences };
           });
         });
       }
@@ -43,9 +54,12 @@ export default function WordPage({ navigation }: any) {
   const word = words[activeIndex];
 
   return (
-    <View className="flex h-screen w-full flex-col px-4 py-8" style={{
-      backgroundColor: isTitleSide ? "white" : "#F1FBFB"
-    }}>
+    <View
+      className="flex h-screen w-full flex-col px-4 py-8"
+      style={{
+        backgroundColor: isTitleSide ? "white" : "#F1FBFB",
+      }}
+    >
       {isTitleSide ? (
         <WordTitleSide word={word} showMeaning={showMeaning} />
       ) : (
