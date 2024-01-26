@@ -10,6 +10,6 @@ export default async function getWordProgress(
     });
     return progress;
   } catch (error: any) {
-    return Progress.Unknown;
+    return Progress.New;
   }
 }

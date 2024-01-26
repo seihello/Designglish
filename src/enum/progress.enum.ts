@@ -1,5 +1,5 @@
 enum Progress {
-  Unknown = "Unknown",
+  New = "New",
   Mastered = "Mastered",
   Reviewing = "Reviewing",
   Learning = "Learning",

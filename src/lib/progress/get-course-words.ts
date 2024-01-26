@@ -20,7 +20,7 @@ export default async function getCourseWords(
         const sentences: string[] = wordRow.sentences.map(
           (sentence: any) => sentence.sentence,
         );
-        let progress = Progress.Unknown;
+        let progress = Progress.New;
         try {
           progress = await getWordProgress(wordRow.id);
         } catch (error) {

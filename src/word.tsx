@@ -72,8 +72,9 @@ export default function WordPage({ navigation }: any) {
         reviewingCount += 1;
         break;
       case Progress.Learning:
-      default:
         learningCount += 1;
+        break;
+      default:
         break;
     }
   }
