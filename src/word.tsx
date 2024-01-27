@@ -14,6 +14,10 @@ export default function WordPage({ navigation }: any) {
   const [isTitleSide, setIsTitleSide] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const [masteredCount, setMasteredCount] = useState(0);
+  const [reviewingCount, setReviewingCount] = useState(0);
+  const [learningCount, setLearningCount] = useState(0);
+
   const toNext = () => {
     const finishCourse = () => {
       navigation.push("Home");
@@ -57,27 +61,32 @@ export default function WordPage({ navigation }: any) {
     getData();
   }, []);
 
+  useEffect(() => {
+    let masteredCount = 0;
+    let reviewingCount = 0;
+    let learningCount = 0;
+    for (const word of words) {
+      switch (word.progress) {
+        case Progress.Mastered:
+          masteredCount += 1;
+          break;
+        case Progress.Reviewing:
+          reviewingCount += 1;
+          break;
+        case Progress.Learning:
+          learningCount += 1;
+          break;
+        default:
+          break;
+      }
+    }
+    setMasteredCount(masteredCount);
+    setReviewingCount(reviewingCount);
+    setLearningCount(learningCount);
+  }, [words]);
+
   if (words.length === 0) return;
   const word = words[activeIndex];
-
-  let masteredCount = 0;
-  let reviewingCount = 0;
-  let learningCount = 0;
-  for (const word of words) {
-    switch (word.progress) {
-      case Progress.Mastered:
-        masteredCount += 1;
-        break;
-      case Progress.Reviewing:
-        reviewingCount += 1;
-        break;
-      case Progress.Learning:
-        learningCount += 1;
-        break;
-      default:
-        break;
-    }
-  }
 
   return (
     <View

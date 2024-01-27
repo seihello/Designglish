@@ -1,5 +1,5 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { Animated, View } from "react-native";
 import ProgressType from "../../../enums/progress-type";
 import Text from "../ui/text";
 
@@ -10,6 +10,20 @@ type Props = {
 };
 
 export default function ProgressBar({ type, total, count }: Props) {
+  const transitWidth = useRef(new Animated.Value(0)).current;
+
+  const updateWidth = (width: number) => {
+    Animated.timing(transitWidth, {
+      toValue: width,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  useEffect(() => {
+    updateWidth(Math.round((count / total) * 100));
+  }, [total, count]);
+
   const bgColor =
     type === ProgressType.Mastered
       ? "bg-primary-main"
@@ -28,12 +42,16 @@ export default function ProgressBar({ type, total, count }: Props) {
         )}%`}</Text>
       </View>
       <View className="mt-1 h-2 w-full overflow-hidden rounded-full bg-gray-300">
-        <View
+        <Animated.View
           className={`h-2 ${bgColor}`}
           style={{
-            width: `${Math.round((count / total) * 100)}%`,
+            // width: `${Math.round((count / total) * 100)}%`,
+            width: transitWidth.interpolate({
+              inputRange: [0, 100],
+              outputRange: ["0%", "100%"],
+            }),
           }}
-        ></View>
+        ></Animated.View>
       </View>
     </View>
   );
