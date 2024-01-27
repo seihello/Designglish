@@ -10,7 +10,9 @@ type Props = {
 };
 
 export default function ProgressBar({ type, total, count }: Props) {
-  const transitWidth = useRef(new Animated.Value(0)).current;
+  const transitWidth = useRef(
+    new Animated.Value(Math.round((count / total) * 100)),
+  ).current;
 
   const updateWidth = (width: number) => {
     Animated.timing(transitWidth, {

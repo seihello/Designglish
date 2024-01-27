@@ -18,6 +18,8 @@ export default function WordPage({ navigation }: any) {
   const [reviewingCount, setReviewingCount] = useState(0);
   const [learningCount, setLearningCount] = useState(0);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const toNext = () => {
     const finishCourse = () => {
       navigation.push("Home");
@@ -53,6 +55,7 @@ export default function WordPage({ navigation }: any) {
       try {
         const words = await getCourseWords();
         setWords(words);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -85,7 +88,7 @@ export default function WordPage({ navigation }: any) {
     setLearningCount(learningCount);
   }, [words]);
 
-  if (words.length === 0) return;
+  if (isLoading || words.length === 0) return;
   const word = words[activeIndex];
 
   return (
