@@ -23,6 +23,8 @@ export default async function getCourseWords(
         let progress = Progress.New;
         try {
           progress = await getWordProgress(wordRow.id);
+          console.log("Progress", progress);
+          
         } catch (error) {
           console.error(error);
         }

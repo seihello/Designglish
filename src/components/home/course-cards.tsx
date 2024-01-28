@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Image, TouchableHighlight, View } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { Alert, Image, TouchableHighlight, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import getCourseProgress from "../../lib/progress/get-course-progress";
+import resetWordProgress from "../../lib/progress/reset-word-progress";
 import Text from "../ui/text";
 
 type Props = {
@@ -19,16 +20,36 @@ export default function CourseCards({
   const [total, setTotal] = useState(0);
   const [masteredCount, setMasteredCount] = useState(0);
 
-  useEffect(() => {
-    const setProgress = async () => {
-      const { total, masteredCount } = await getCourseProgress();
-      setTotal(total);
-      setMasteredCount(masteredCount);
-      setLoading(false);
-    };
-
-    setProgress();
+  const setProgress = useCallback(async () => {
+    const { total, masteredCount } = await getCourseProgress();
+    setTotal(total);
+    setMasteredCount(masteredCount);
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    console.log("set Progress home");
+    
+    setProgress();
+  }, [setProgress]);
+
+  const reset = async () => {
+    Alert.alert("Reset progress", "", [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Reset"),
+        style: "cancel",
+      },
+      {
+        text: "OK",
+        onPress: async () => {
+          await resetWordProgress();
+          await setProgress();
+          // setMasteredCount(0);
+        },
+      },
+    ]);
+  };
 
   if (loading) return;
 
@@ -36,6 +57,7 @@ export default function CourseCards({
     <View className="mt-2">
       <TouchableHighlight
         onPress={() => navigation.push("Word")}
+        onLongPress={reset}
         underlayColor="white"
         className="w-full"
       >
