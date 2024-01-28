@@ -47,7 +47,9 @@ export default function CourseCards({
               <Text className="font-roboto text-gray-600">
                 {masteredCount}/{total} mastered
               </Text>
-              <Text className="font-roboto text-gray-600">0%</Text>
+              <Text className="font-roboto text-gray-600">
+                {Math.round((masteredCount / total) * 100)}%
+              </Text>
             </View>
             <View className="w-full overflow-hidden rounded-full border-[1px] border-gray-200 bg-white">
               <View
