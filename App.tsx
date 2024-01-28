@@ -24,7 +24,18 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+            // title: "",
+            // headerStyle: {
+            //   backgroundColor: "#239CAC",
+            // },
+            // headerShadowVisible: false,
+          }}
+          name="Home"
+          component={HomePage}
+        />
         <Stack.Screen name="Word" component={WordPage} />
       </Stack.Navigator>
     </NavigationContainer>
