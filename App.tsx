@@ -19,12 +19,16 @@ export default function App() {
     Caveat: require("./assets/fonts/Caveat-VariableFont_wght.ttf"),
   });
 
+  // const [headerTitle, setHeaderTitle] = useState("");
+
   if (!fontsLoaded) return null;
 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
+          name="Home"
+          component={HomePage}
           options={{
             headerShown: false,
             // title: "",
@@ -33,10 +37,19 @@ export default function App() {
             // },
             // headerShadowVisible: false,
           }}
-          name="Home"
-          component={HomePage}
         />
-        <Stack.Screen name="Word" component={WordPage} />
+        <Stack.Screen
+          name="Word"
+          component={WordPage}
+          options={{
+            headerShadowVisible: false,
+            headerTintColor: "#239CAC",
+            headerTitleStyle: {
+              color: "#000000",
+              fontFamily: "DMSansBold",
+            },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

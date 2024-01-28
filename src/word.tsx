@@ -55,6 +55,9 @@ export default function WordPage({ navigation }: any) {
       try {
         const words = await getCourseWords();
         setWords(words);
+
+        navigation.setOptions({ headerTitle: "Common words" });
+
         setIsLoading(false);
       } catch (error) {
         console.error(error);
