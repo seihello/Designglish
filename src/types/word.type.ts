@@ -5,7 +5,10 @@ type Word = {
   title: string;
   meaning: string;
   sentences: string[];
+  ipa: string;
+  parts: string[];
+  synonyms: string[];
   progress: Progress;
-}
+};
 
 export default Word;

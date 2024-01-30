@@ -12,8 +12,6 @@ type Props = {
   toNext: () => void;
 };
 
-const synonyms = ["prompt", "gentle persuasion", "subtle encouragement"];
-
 export default function WordMeaningSide({
   word,
   updateProgress,
@@ -62,26 +60,29 @@ export default function WordMeaningSide({
         <Text className="font-dm-bold text-[32px] text-gray-800">
           {word.title}
         </Text>
-        <Text className="font-roboto-italic text-primary-main">nʌ'dʒ</Text>
+        <Text className="font-roboto-italic text-primary-main">{word.ipa}</Text>
       </View>
 
       <View className="flex flex-col gap-y-2">
         <Text className="w-full text-left font-dm-bold text-base text-gray-600">
-          [Noun / Verb]
+          [{word.parts.join(" / ")}]
         </Text>
         <Text className="font-roboto text-gray-600">{word.meaning}</Text>
       </View>
 
-      <View className="flex flex-col gap-y-2">
-        <Text className="w-full text-left font-dm-bold text-base text-gray-600">
-          Synonym
-        </Text>
-        <View className="flex flex-row flex-wrap gap-x-1 gap-y-1">
-          {synonyms.map((synonym: string, index: number) => (
-            <Chip key={index}>{synonym}</Chip>
-          ))}
+      {word.synonyms.length > 0 && (
+        <View className="flex flex-col gap-y-2">
+          <Text className="w-full text-left font-dm-bold text-base text-gray-600">
+            Synonym
+          </Text>
+
+          <View className="flex flex-row flex-wrap gap-x-1 gap-y-1">
+            {word.synonyms.map((synonym: string, index: number) => (
+              <Chip key={index}>{synonym}</Chip>
+            ))}
+          </View>
         </View>
-      </View>
+      )}
 
       <View className="flex flex-col gap-y-2">
         <Text className="w-full text-left font-dm-bold text-base text-gray-600">

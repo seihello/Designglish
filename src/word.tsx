@@ -63,8 +63,6 @@ export default function WordPage({ navigation }: any) {
         console.error(error);
       }
     };
-
-    console.log("Get word data");
     
     getData();
   }, []);
