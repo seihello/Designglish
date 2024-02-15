@@ -11,10 +11,12 @@ type Props = {
 
 export default function WordTitleSide({ word, showMeaning }: Props) {
   return (
-    <View className="relative mt-4 flex flex-col items-center justify-between rounded-2xl border-[1px] border-gray-200 bg-primary-100 px-8 py-8">
-      <Text className="font-dm-bold text-[32px]">{word.title}</Text>
+    <View className="relative mt-4 flex flex-col items-center justify-between rounded-2xl border-[1px] border-gray-200 bg-primary-100 px-8">
+      <Text className="my-[40px] font-dm-bold text-[32px] leading-[41.66px]">
+        {word.title}
+      </Text>
       <Button
-        className="mt-4 bg-primary-900"
+        className="mb-8 bg-primary-900"
         title="See the definition"
         onPress={() => {
           showMeaning();
