@@ -63,7 +63,7 @@ export default function WordPage({ navigation }: any) {
         console.error(error);
       }
     };
-    
+
     getData();
   }, []);
 
@@ -96,7 +96,7 @@ export default function WordPage({ navigation }: any) {
 
   return (
     <View
-      className="flex h-screen w-full flex-col px-4 py-6"
+      className="absolute -top-24 flex h-screen w-full flex-col px-4 py-6 pt-24"
       style={{
         backgroundColor: isTitleSide ? "white" : "#F1FBFB",
       }}
