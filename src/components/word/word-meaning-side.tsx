@@ -60,7 +60,9 @@ export default function WordMeaningSide({
         <Text className="font-dm-bold text-[32px] text-gray-900">
           {word.title}
         </Text>
-        <Text className="font-roboto-italic text-primary-900">{word.ipa}</Text>
+        <Text className="font-roboto-italic tracking-wide text-primary-900">
+          {word.ipa}
+        </Text>
       </View>
 
       <View className="flex flex-col gap-y-2">
