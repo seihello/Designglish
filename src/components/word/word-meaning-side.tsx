@@ -55,9 +55,9 @@ export default function WordMeaningSide({
   };
 
   return (
-    <View className="items-between flex flex-col gap-y-4 rounded-2xl border-[1px] border-gray-200 bg-white px-8 pb-8 pt-4">
+    <View className="items-between flex flex-col space-y-4 rounded-2xl border-[1px] border-gray-200 bg-white px-8 pb-8 pt-10">
       <View className="flex flex-col items-center">
-        <Text className="font-dm-bold text-[32px] text-gray-900">
+        <Text className="font-dm-bold text-[32px] leading-[41.66px] text-gray-900">
           {word.title}
         </Text>
         <Text className="font-roboto-italic tracking-wide text-primary-900">

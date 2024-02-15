@@ -96,7 +96,7 @@ export default function WordPage({ navigation }: any) {
 
   return (
     <View
-      className="flex h-screen w-full flex-col px-4 py-8"
+      className="flex h-screen w-full flex-col px-4 py-6"
       style={{
         backgroundColor: isTitleSide ? "white" : "#F1FBFB",
       }}
