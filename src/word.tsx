@@ -68,6 +68,14 @@ export default function WordPage({ navigation }: any) {
   }, []);
 
   useEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: isTitleSide ? "#FFFFFF" : "#F1FBFB",
+      },
+    });
+  }, [isTitleSide]);
+
+  useEffect(() => {
     let masteredCount = 0;
     let reviewingCount = 0;
     let learningCount = 0;
@@ -96,7 +104,7 @@ export default function WordPage({ navigation }: any) {
 
   return (
     <View
-      className="absolute -top-24 flex h-screen w-full flex-col px-4 py-6 pt-24"
+      className="flex h-screen w-full flex-col px-4 py-6"
       style={{
         backgroundColor: isTitleSide ? "white" : "#F1FBFB",
       }}

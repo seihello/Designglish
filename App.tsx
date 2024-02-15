@@ -48,9 +48,6 @@ export default function App() {
               color: "#000000",
               fontFamily: "DMSansBold",
             },
-            headerStyle: {
-              backgroundColor: "#00000000",
-            },
           }}
         />
       </Stack.Navigator>
