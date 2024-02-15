@@ -57,22 +57,24 @@ export default function WordMeaningSide({
   return (
     <View className="items-between flex flex-col gap-y-4 rounded-2xl border-[1px] border-gray-200 bg-white px-8 pb-8 pt-4">
       <View className="flex flex-col items-center">
-        <Text className="font-dm-bold text-[32px] text-gray-800">
+        <Text className="font-dm-bold text-[32px] text-gray-900">
           {word.title}
         </Text>
-        <Text className="font-roboto-italic text-primary-main">{word.ipa}</Text>
+        <Text className="font-roboto-italic text-primary-900">{word.ipa}</Text>
       </View>
 
       <View className="flex flex-col gap-y-2">
-        <Text className="w-full text-left font-dm-bold text-base text-gray-600">
+        <Text className="w-full text-left font-dm-bold text-base text-gray-700">
           [{word.parts.join(" / ")}]
         </Text>
-        <Text className="font-roboto text-gray-600">{word.meaning}</Text>
+        <Text className="font-roboto leading-[20px] text-gray-900">
+          {word.meaning}
+        </Text>
       </View>
 
       {word.synonyms.length > 0 && (
         <View className="flex flex-col gap-y-2">
-          <Text className="w-full text-left font-dm-bold text-base text-gray-600">
+          <Text className="w-full text-left font-dm-bold text-base text-gray-700">
             Synonym
           </Text>
 
@@ -85,11 +87,14 @@ export default function WordMeaningSide({
       )}
 
       <View className="flex flex-col gap-y-2">
-        <Text className="w-full text-left font-dm-bold text-base text-gray-600">
+        <Text className="w-full text-left font-dm-bold text-base text-gray-700">
           Example
         </Text>
         {word.sentences.map((sentence: string, index: number) => (
-          <Text key={index} className="font-roboto text-gray-600">
+          <Text
+            key={index}
+            className="font-roboto-italic leading-[20px] text-gray-900"
+          >
             {sentence}
           </Text>
         ))}
@@ -99,12 +104,12 @@ export default function WordMeaningSide({
         <Button
           title="I knew this word"
           onPress={onPressedKnown}
-          className="bg-primary-main"
+          className="bg-primary-900"
         />
         <Button
           title="I didn't know this word"
           onPress={onPressedUnknown}
-          className="bg-red-main"
+          className="bg-error-900"
         />
       </View>
     </View>

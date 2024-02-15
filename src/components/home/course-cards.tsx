@@ -28,8 +28,6 @@ export default function CourseCards({
   }, []);
 
   useEffect(() => {
-    console.log("set Progress home");
-    
     setProgress();
   }, [setProgress]);
 
@@ -61,21 +59,21 @@ export default function CourseCards({
         underlayColor="white"
         className="w-full"
       >
-        <View className="mt-2 flex w-full flex-row items-center overflow-hidden rounded-xl bg-primary-light">
+        <View className="mt-2 flex w-full flex-row items-center overflow-hidden rounded-xl bg-primary-100">
           <Image source={require("../../../assets/course-logo-1.png")} />
           <View className="flex flex-1 flex-col  p-4">
             <Text className="font-dm-bold text-lg">Common words</Text>
             <View className="mt-2 flex flex-row justify-between">
-              <Text className="font-roboto text-gray-600">
+              <Text className="font-roboto text-gray-700">
                 {masteredCount}/{total} mastered
               </Text>
-              <Text className="font-roboto text-gray-600">
+              <Text className="font-roboto text-gray-700">
                 {Math.round((masteredCount / total) * 100)}%
               </Text>
             </View>
             <View className="w-full overflow-hidden rounded-full border-[1px] border-gray-200 bg-white">
               <View
-                className="h-2 bg-primary-main"
+                className="h-2 bg-primary-900"
                 style={{
                   width: `${Math.round((masteredCount / total) * 100)}%`,
                 }}

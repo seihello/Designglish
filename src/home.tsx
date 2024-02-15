@@ -5,7 +5,7 @@ import Text from "./components/ui/text";
 
 export default function HomePage(props: any) {
   return (
-    <View className="flex h-screen w-full flex-col bg-primary-main pt-16">
+    <View className="flex h-screen w-full flex-col bg-primary-900 pt-16">
       <View className="relative flex h-48 flex-col justify-center">
         <Image
           source={require("../assets/mv.png")}
@@ -26,7 +26,7 @@ export default function HomePage(props: any) {
                 Hi!
               </Text>
             </View>
-            <Text className="font-dm-bold text-lg text-white">
+            <Text className="font-dm-bold text-lg text-white leading-[20.83px]">
               What do you want to learn today?
             </Text>
           </View>

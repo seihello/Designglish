@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import ProgressType from "../enums/progress-type";
-import ProgressBar from "./components/word/progress-bar";
+import ProgressBar, { ColorType } from "./components/word/progress-bar";
 import WordMeaningSide from "./components/word/word-meaning-side";
 import WordTitleSide from "./components/word/word-title-side";
 import Progress from "./enum/progress.enum";
@@ -113,16 +113,19 @@ export default function WordPage({ navigation }: any) {
       <View className="flex flex-col">
         <ProgressBar
           type={ProgressType.Mastered}
+          colorType={isTitleSide ? ColorType.Gray : ColorType.White}
           total={words.length}
           count={masteredCount}
         />
         <ProgressBar
           type={ProgressType.Reviewing}
+          colorType={isTitleSide ? ColorType.Gray : ColorType.White}
           total={words.length}
           count={reviewingCount}
         />
         <ProgressBar
           type={ProgressType.Learning}
+          colorType={isTitleSide ? ColorType.Gray : ColorType.White}
           total={words.length}
           count={learningCount}
         />

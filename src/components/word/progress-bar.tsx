@@ -3,13 +3,19 @@ import { Animated, View } from "react-native";
 import ProgressType from "../../../enums/progress-type";
 import Text from "../ui/text";
 
+export enum ColorType {
+  White,
+  Gray,
+}
+
 type Props = {
   type: ProgressType;
   count: number;
   total: number;
+  colorType: ColorType;
 };
 
-export default function ProgressBar({ type, total, count }: Props) {
+export default function ProgressBar({ type, total, count, colorType }: Props) {
   const transitWidth = useRef(
     new Animated.Value(Math.round((count / total) * 100)),
   ).current;
@@ -28,22 +34,26 @@ export default function ProgressBar({ type, total, count }: Props) {
 
   const bgColor =
     type === ProgressType.Mastered
-      ? "bg-primary-main"
+      ? "bg-primary-900"
       : type === ProgressType.Reviewing
-        ? "bg-yellow-main"
+        ? "bg-warning-900"
         : type === ProgressType.Learning
-          ? "bg-red-main"
+          ? "bg-error-900"
           : "";
 
   return (
     <View className="mt-4">
       <View className="flex flex-row justify-between">
-        <Text className="font-roboto text-xs text-gray-600">{`${count}/${total} ${type.toString()}`}</Text>
-        <Text className="font-roboto text-xs text-gray-600">{`${Math.round(
+        <Text className="font-roboto text-xs text-gray-700">{`${count}/${total} ${type.toString()}`}</Text>
+        <Text className="font-roboto text-xs text-gray-700">{`${Math.round(
           (count / total) * 100,
         )}%`}</Text>
       </View>
-      <View className="mt-1 h-2 w-full overflow-hidden rounded-full bg-gray-300">
+      <View
+        className={`mt-1 h-2 w-full overflow-hidden rounded-full ${
+          colorType === ColorType.White ? "bg-white" : "bg-gray-200"
+        } ${colorType === ColorType.White ? "border border-gray-300" : ""}`}
+      >
         <Animated.View
           className={`h-2 ${bgColor}`}
           style={{
