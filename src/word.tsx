@@ -1,3 +1,4 @@
+import * as d3 from "d3-array";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import ProgressType from "../enums/progress-type";
@@ -54,7 +55,7 @@ export default function WordPage({ navigation }: any) {
     const getData = async () => {
       try {
         const words = await getCourseWords();
-        setWords(words);
+        setWords(d3.shuffle(words));
 
         navigation.setOptions({ headerTitle: "Common words" });
 
