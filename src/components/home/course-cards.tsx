@@ -64,14 +64,14 @@ export default function CourseCards({
           <View className="flex flex-1 flex-col  p-4">
             <Text className="font-dm-bold text-lg">Common words</Text>
             <View className="mt-2 flex flex-row justify-between">
-              <Text className="font-roboto text-gray-700">
+              <Text className="font-roboto text-xs text-gray-700">
                 {masteredCount}/{total} mastered
               </Text>
-              <Text className="font-roboto text-gray-700">
+              <Text className="font-roboto text-xs text-gray-700">
                 {Math.round((masteredCount / total) * 100)}%
               </Text>
             </View>
-            <View className="w-full overflow-hidden rounded-full border-[1px] border-gray-200 bg-white">
+            <View className="w-full overflow-hidden rounded-full border-[1px] border-gray-200 bg-white text-xs">
               <View
                 className="h-2 bg-primary-900"
                 style={{
