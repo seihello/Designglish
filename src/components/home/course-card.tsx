@@ -57,7 +57,7 @@ export default function CourseCard({
   return (
     <View className="mt-2">
       <TouchableHighlight
-        onPress={() => navigation.push("Word")}
+        onPress={() => navigation.push("Word", { phaseId: phase.id })}
         onLongPress={reset}
         underlayColor="white"
         className="w-full"

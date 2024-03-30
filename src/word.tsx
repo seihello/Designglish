@@ -10,7 +10,8 @@ import getCourseWords from "./lib/progress/get-course-words";
 import updateWordProgress from "./lib/progress/update-word-progress";
 import Word from "./types/word.type";
 
-export default function WordPage({ navigation }: any) {
+export default function WordPage({ navigation, route }: any) {
+  const { phaseId } = route.params;
   const [words, setWords] = useState<Word[]>([]);
   const [isTitleSide, setIsTitleSide] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
