@@ -13,8 +13,6 @@ export default function HomeMainPanel({ navigation }: any) {
     const run = async () => {
       try {
         const phases = await getAllPhases();
-        console.log("phases", phases);
-
         setPhases(phases);
       } catch (error) {
         console.error(error);
