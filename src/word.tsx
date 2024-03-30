@@ -55,7 +55,7 @@ export default function WordPage({ navigation, route }: any) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const words = await getCourseWords();
+        const words = await getCourseWords(phaseId);
         setWords(d3.shuffle(words));
 
         navigation.setOptions({ headerTitle: "Common words" });
