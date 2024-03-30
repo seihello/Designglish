@@ -3,16 +3,19 @@ import { Alert, Image, TouchableHighlight, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import getCourseProgress from "../../lib/progress/get-course-progress";
 import resetWordProgress from "../../lib/progress/reset-word-progress";
+import Phase from "../../types/phase.type";
 import Text from "../ui/text";
 
 type Props = {
   navigation: any;
+  phase: Phase;
   // total: number;
   // masteredCount: number;
 };
 
-export default function CourseCards({
+export default function CourseCard({
   navigation,
+  phase,
   // total,
   // masteredCount,
 }: Props) {
@@ -21,7 +24,7 @@ export default function CourseCards({
   const [masteredCount, setMasteredCount] = useState(0);
 
   const setProgress = useCallback(async () => {
-    const { total, masteredCount } = await getCourseProgress();
+    const { total, masteredCount } = await getCourseProgress(phase.id);
     setTotal(total);
     setMasteredCount(masteredCount);
     setLoading(false);
@@ -62,7 +65,7 @@ export default function CourseCards({
         <View className="mt-2 flex w-full flex-row items-center overflow-hidden rounded-xl bg-primary-100">
           <Image source={require("../../../assets/course-logo-1.png")} />
           <View className="flex flex-1 flex-col  p-4">
-            <Text className="font-dm-bold text-lg">Common words</Text>
+            <Text className="font-dm-bold text-lg">{phase.name}</Text>
             <View className="mt-2 flex flex-row justify-between">
               <Text className="font-roboto text-xs text-gray-700">
                 {masteredCount}/{total} mastered

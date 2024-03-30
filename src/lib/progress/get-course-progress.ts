@@ -2,22 +2,28 @@ import Progress from "../../enum/progress.enum";
 import { supabase } from "../supabase";
 import getWordProgress from "./get-word-progress";
 
-export default async function getCourseProgress(/*courseId: number*/) {
+export default async function getCourseProgress(phaseId: number) {
   try {
-    const { data, error } = await supabase.from("words").select("id");
-    if (error) {
-      throw new Error(error.message);
+    const phaseWordIdsRes = await supabase
+      .from("word_phases")
+      .select("word_id")
+      .eq("phase_id", phaseId);
+
+    if (!phaseWordIdsRes.data || phaseWordIdsRes.data.length === 0) {
+      throw new Error(
+        `Words not found for this phase. (Phase ID = ${phaseId})`,
+      );
     }
 
     let masteredCount = 0;
-    for (const wordRow of data) {
-      const progress: Progress = await getWordProgress(wordRow.id);
+    for (const row of phaseWordIdsRes.data) {
+      const progress: Progress = await getWordProgress(row.word_id);
       if (progress === Progress.Mastered) {
         masteredCount++;
       }
     }
 
-    return { total: data.length, masteredCount: masteredCount };
+    return { total: phaseWordIdsRes.data.length, masteredCount: masteredCount };
   } catch (error) {
     throw error;
   }
