@@ -6,6 +6,14 @@ import resetWordProgress from "../../lib/progress/reset-word-progress";
 import Phase from "../../types/phase.type";
 import Text from "../ui/text";
 
+const PHASE_IMAGES = {
+  1: require(`../../../assets/img/phases/1.png`),
+  2: require(`../../../assets/img/phases/2.png`),
+  3: require(`../../../assets/img/phases/3.png`),
+  4: require(`../../../assets/img/phases/4.png`),
+  5: require(`../../../assets/img/phases/5.png`),
+};
+
 type Props = {
   navigation: any;
   phase: Phase;
@@ -63,7 +71,19 @@ export default function CourseCard({
         className="w-full"
       >
         <View className="mt-2 flex w-full flex-row items-center overflow-hidden rounded-xl bg-primary-100">
-          <Image source={require("../../../assets/course-logo-1.png")} />
+          <Image
+            source={
+              phase.id === 1
+                ? PHASE_IMAGES[1]
+                : phase.id === 2
+                  ? PHASE_IMAGES[2]
+                  : phase.id === 3
+                    ? PHASE_IMAGES[3]
+                    : phase.id === 4
+                      ? PHASE_IMAGES[4]
+                      : PHASE_IMAGES[5]
+            }
+          />
           <View className="flex flex-1 flex-col  p-4">
             <Text className="font-dm-bold text-lg">{phase.name}</Text>
             <View className="mt-2 flex flex-row justify-between">
