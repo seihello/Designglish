@@ -17,6 +17,27 @@ export default function CategoryChips({
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       <View className="mt-2 flex flex-row gap-x-2">
+        <TouchableHighlight
+          onPress={() => setSelectedCategoryId(-1)}
+          underlayColor="white"
+        >
+          <View
+            className={`rounded-full px-4 py-2 ${
+              selectedCategoryId === -1 ? "bg-primary-900" : "bg-primary-100"
+            }`}
+          >
+            <Text
+              className={`font-dm-bold ${
+                selectedCategoryId === -1
+                  ? "text-primary-100"
+                  : "text-primary-900"
+              }`}
+            >
+              All
+            </Text>
+          </View>
+        </TouchableHighlight>
+
         {categories.map((category, index) => (
           <TouchableHighlight
             key={index}

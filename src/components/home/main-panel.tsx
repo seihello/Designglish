@@ -15,7 +15,7 @@ export default function HomeMainPanel({ navigation }: any) {
   const [phases, setPhases] = useState<Phase[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number>(0);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number>(-1);
   const [isLoadingPhases, setIsLoadingPhases] = useState<boolean>(false);
 
   useEffect(() => {
@@ -50,12 +50,13 @@ export default function HomeMainPanel({ navigation }: any) {
     filteredWordInfoList.push(
       wordInfoList.filter(
         (wordInfo) =>
-          wordInfo.categoryIds.includes(selectedCategoryId) &&
+          (selectedCategoryId === -1 ||
+            wordInfo.categoryIds.includes(selectedCategoryId)) &&
           wordInfo.phaseIds.includes(i),
       ),
     );
   }
-  
+
   // Just in case
   if (filteredWordInfoList.length !== phases.length) return;
 
