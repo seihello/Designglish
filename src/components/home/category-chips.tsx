@@ -23,8 +23,20 @@ export default function CategoryChips({
             onPress={() => setSelectedCategoryId(category.id)}
             underlayColor="white"
           >
-            <View className="rounded-xl bg-primary-100 px-4 py-2">
-              <Text className="font-dm-bold text-primary-900">
+            <View
+              className={`rounded-full px-4 py-2 ${
+                category.id === selectedCategoryId
+                  ? "bg-primary-900"
+                  : "bg-primary-100"
+              }`}
+            >
+              <Text
+                className={`font-dm-bold ${
+                  category.id === selectedCategoryId
+                    ? "text-primary-100"
+                    : "text-primary-900"
+                }`}
+              >
                 {category.name}
               </Text>
             </View>
