@@ -78,16 +78,21 @@ export default function CourseCard({
                 {masteredCount}/{wordInfoList.length} mastered
               </Text>
               <Text className="font-roboto text-xs text-gray-700">
-                {Math.round((masteredCount / wordInfoList.length) * 100)}%
+                {wordInfoList.length === 0
+                  ? 0
+                  : Math.round((masteredCount / wordInfoList.length) * 100)}
+                %
               </Text>
             </View>
             <View className="w-full overflow-hidden rounded-full border-[1px] border-gray-200 bg-white text-xs">
               <View
                 className="h-2 bg-primary-900"
                 style={{
-                  width: `${Math.round(
-                    (masteredCount / wordInfoList.length) * 100,
-                  )}%`,
+                  width: `${
+                    wordInfoList.length === 0
+                      ? 0
+                      : Math.round((masteredCount / wordInfoList.length) * 100)
+                  }%`,
                 }}
               ></View>
             </View>
