@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { Alert, Image, TouchableHighlight, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import getCourseProgress from "../../lib/progress/get-course-progress";
+import Progress from "../../enum/progress.enum";
 import resetWordProgress from "../../lib/progress/reset-word-progress";
 import Phase from "../../types/phase.type";
+import WordInfo from "../../types/word-info.type";
 import Text from "../ui/text";
 
 const PHASE_IMAGES = {
@@ -16,32 +17,17 @@ const PHASE_IMAGES = {
 
 type Props = {
   navigation: any;
+  categoryId: number;
   phase: Phase;
-  // total: number;
-  // masteredCount: number;
+  wordInfoList: WordInfo[];
 };
 
 export default function CourseCard({
   navigation,
+  categoryId,
   phase,
-  // total,
-  // masteredCount,
+  wordInfoList,
 }: Props) {
-  const [loading, setLoading] = useState(true);
-  const [total, setTotal] = useState(0);
-  const [masteredCount, setMasteredCount] = useState(0);
-
-  const setProgress = useCallback(async () => {
-    const { total, masteredCount } = await getCourseProgress(phase.id);
-    setTotal(total);
-    setMasteredCount(masteredCount);
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    setProgress();
-  }, [setProgress]);
-
   const reset = async () => {
     Alert.alert("Reset progress", "", [
       {
@@ -53,14 +39,15 @@ export default function CourseCard({
         text: "OK",
         onPress: async () => {
           await resetWordProgress();
-          await setProgress();
-          // setMasteredCount(0);
+          // await setProgress();
         },
       },
     ]);
   };
 
-  if (loading) return;
+  const masteredCount = wordInfoList.filter(
+    (wordInfo) => wordInfo.progress === Progress.Mastered,
+  ).length;
 
   return (
     <View className="mt-2">
@@ -88,17 +75,19 @@ export default function CourseCard({
             <Text className="font-dm-bold text-lg">{phase.name}</Text>
             <View className="mt-2 flex flex-row justify-between">
               <Text className="font-roboto text-xs text-gray-700">
-                {masteredCount}/{total} mastered
+                {masteredCount}/{wordInfoList.length} mastered
               </Text>
               <Text className="font-roboto text-xs text-gray-700">
-                {Math.round((masteredCount / total) * 100)}%
+                {Math.round((masteredCount / wordInfoList.length) * 100)}%
               </Text>
             </View>
             <View className="w-full overflow-hidden rounded-full border-[1px] border-gray-200 bg-white text-xs">
               <View
                 className="h-2 bg-primary-900"
                 style={{
-                  width: `${Math.round((masteredCount / total) * 100)}%`,
+                  width: `${Math.round(
+                    (masteredCount / wordInfoList.length) * 100,
+                  )}%`,
                 }}
               ></View>
             </View>

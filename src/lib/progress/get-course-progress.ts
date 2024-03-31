@@ -2,7 +2,10 @@ import Progress from "../../enum/progress.enum";
 import { supabase } from "../supabase";
 import getWordProgress from "./get-word-progress";
 
-export default async function getCourseProgress(phaseId: number) {
+export default async function getCourseProgress(
+  categoryId: number,
+  phaseId: number,
+) {
   try {
     const phaseWordIdsRes = await supabase
       .from("word_phases")
