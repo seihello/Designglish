@@ -52,7 +52,12 @@ export default function CourseCard({
   return (
     <View className="mt-2">
       <TouchableHighlight
-        onPress={() => navigation.push("Word", { phaseId: phase.id })}
+        onPress={() =>
+          navigation.push("Word", {
+            wordIds: wordInfoList.map((wordInfo) => wordInfo.id),
+            phaseName: phase.name,
+          })
+        }
         onLongPress={reset}
         underlayColor="white"
         className="w-full"

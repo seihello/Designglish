@@ -6,12 +6,12 @@ import ProgressBar, { ColorType } from "./components/word/progress-bar";
 import WordMeaningSide from "./components/word/word-meaning-side";
 import WordTitleSide from "./components/word/word-title-side";
 import Progress from "./enum/progress.enum";
-import getCourseWords from "./lib/progress/get-course-words";
+import getWordsByIds from "./lib/progress/get-words-by-ids";
 import updateWordProgress from "./lib/progress/update-word-progress";
 import Word from "./types/word.type";
 
 export default function WordPage({ navigation, route }: any) {
-  const { phaseId } = route.params;
+  const { wordIds, phaseName } = route.params;
   const [words, setWords] = useState<Word[]>([]);
   const [isTitleSide, setIsTitleSide] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -55,10 +55,10 @@ export default function WordPage({ navigation, route }: any) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const words = await getCourseWords(phaseId);
+        const words = await getWordsByIds(wordIds);
         setWords(d3.shuffle(words));
 
-        navigation.setOptions({ headerTitle: "Common words" });
+        navigation.setOptions({ headerTitle: phaseName });
 
         setIsLoading(false);
       } catch (error) {
