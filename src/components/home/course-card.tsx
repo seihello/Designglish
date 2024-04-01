@@ -20,6 +20,7 @@ type Props = {
   categoryId: number;
   phase: Phase;
   wordInfoList: WordInfo[];
+  setIsLoadingWordInfo: (value: boolean) => void;
 };
 
 export default function CourseCard({
@@ -27,6 +28,7 @@ export default function CourseCard({
   categoryId,
   phase,
   wordInfoList,
+  setIsLoadingWordInfo,
 }: Props) {
   const reset = async () => {
     Alert.alert("Reset progress", "", [
@@ -52,12 +54,15 @@ export default function CourseCard({
   return (
     <View className="mt-2">
       <TouchableHighlight
-        onPress={() =>
+        onPress={() => {
+          setTimeout(() => {
+            setIsLoadingWordInfo(true);
+          }, 1000);
           navigation.push("Word", {
             wordIds: wordInfoList.map((wordInfo) => wordInfo.id),
             phaseName: phase.name,
-          })
-        }
+          });
+        }}
         onLongPress={reset}
         underlayColor="white"
         className="w-full"

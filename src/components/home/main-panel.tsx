@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import { Skeleton } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
@@ -12,12 +13,15 @@ import CategoryChips from "./category-chips";
 import CourseCard from "./course-card";
 
 export default function HomeMainPanel({ navigation }: any) {
+  const isFocused = useIsFocused();
+
   const [wordInfoList, setWordInfoList] = useState<WordInfo[]>([]);
   const [phases, setPhases] = useState<Phase[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>(-1);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoadingDefinition, setIsLoadingDefinition] = useState<boolean>(true);
+  const [isLoadingWordInfo, setIsLoadingWordInfo] = useState<boolean>(true);
 
   useEffect(() => {
     const run = async () => {
@@ -26,16 +30,34 @@ export default function HomeMainPanel({ navigation }: any) {
         setCategories(categories);
         const phases = await getAllPhases();
         setPhases(phases);
-        const wordInfoList = await getAllWordInfo();
-        setWordInfoList(wordInfoList);
       } catch (error) {
         console.error(error);
       } finally {
-        setIsLoading(false);
+        setIsLoadingDefinition(false);
       }
     };
     run();
   }, []);
+
+  useEffect(() => {
+    const run = async () => {
+      if (isFocused) {
+        try {
+          const categories = await getAllCategories();
+          setCategories(categories);
+          const phases = await getAllPhases();
+          setPhases(phases);
+          const wordInfoList = await getAllWordInfo();
+          setWordInfoList(wordInfoList);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoadingWordInfo(false);
+        }
+      }
+    };
+    run();
+  }, [isFocused]);
 
   // Filtered word IDs for each phase
   const filteredWordInfoList: Array<Array<WordInfo>> = [];
@@ -62,7 +84,7 @@ export default function HomeMainPanel({ navigation }: any) {
       <View className="flex flex-col items-center rounded-2xl bg-white px-4 py-6">
         <Text className="font-dm-bold text-[28px]">Vocab being learned</Text>
 
-        {isLoading ? (
+        {isLoadingDefinition || isLoadingWordInfo ? (
           <Skeleton
             height={240}
             style={{
@@ -88,6 +110,7 @@ export default function HomeMainPanel({ navigation }: any) {
                     categoryId={selectedCategoryId}
                     phase={phase}
                     wordInfoList={filteredWordInfoList[index]}
+                    setIsLoadingWordInfo={setIsLoadingWordInfo}
                   />
                 ))}
               </View>
