@@ -80,7 +80,7 @@ export default function HomeMainPanel({ navigation }: any) {
               setSelectedCategoryId={setSelectedCategoryId}
             />
             {phases.length > 0 ? (
-              <>
+              <View className="mt-2 w-full">
                 {phases.map((phase, index) => (
                   <CourseCard
                     key={index}
@@ -90,7 +90,7 @@ export default function HomeMainPanel({ navigation }: any) {
                     wordInfoList={filteredWordInfoList[index]}
                   />
                 ))}
-              </>
+              </View>
             ) : (
               <Text>No courses for this category.</Text>
             )}

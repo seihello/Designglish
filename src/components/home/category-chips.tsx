@@ -18,7 +18,7 @@ export default function CategoryChips({
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      className="mt-2 flex"
+      className="mt-4 flex"
       style={{ maxHeight: 32 }}
       contentContainerStyle={{ justifyContent: "flex-start" }}
     >
