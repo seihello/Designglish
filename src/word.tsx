@@ -1,6 +1,6 @@
 import * as d3 from "d3-array";
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import ProgressType from "../enums/progress-type";
 import ProgressBar, { ColorType } from "./components/word/progress-bar";
 import WordMeaningSide from "./components/word/word-meaning-side";
@@ -105,41 +105,44 @@ export default function WordPage({ navigation, route }: any) {
   const word = words[activeIndex];
 
   return (
-    <View
-      className="flex h-screen w-full flex-col px-4 py-6"
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      className="h-screen w-full"
       style={{
         backgroundColor: isTitleSide ? "white" : "#F1FBFB",
       }}
     >
-      {isTitleSide ? (
-        <WordTitleSide word={word} showMeaning={showMeaning} />
-      ) : (
-        <WordMeaningSide
-          word={word}
-          updateProgress={updateProgress}
-          toNext={toNext}
-        />
-      )}
-      <View className="flex flex-col">
-        <ProgressBar
-          type={ProgressType.Mastered}
-          colorType={isTitleSide ? ColorType.Gray : ColorType.White}
-          total={words.length}
-          count={masteredCount}
-        />
-        <ProgressBar
-          type={ProgressType.Reviewing}
-          colorType={isTitleSide ? ColorType.Gray : ColorType.White}
-          total={words.length}
-          count={reviewingCount}
-        />
-        <ProgressBar
-          type={ProgressType.Learning}
-          colorType={isTitleSide ? ColorType.Gray : ColorType.White}
-          total={words.length}
-          count={learningCount}
-        />
+      <View className="flex w-full flex-col px-4 py-6">
+        {isTitleSide ? (
+          <WordTitleSide word={word} showMeaning={showMeaning} />
+        ) : (
+          <WordMeaningSide
+            word={word}
+            updateProgress={updateProgress}
+            toNext={toNext}
+          />
+        )}
+        <View className="flex flex-col">
+          <ProgressBar
+            type={ProgressType.Mastered}
+            colorType={isTitleSide ? ColorType.Gray : ColorType.White}
+            total={words.length}
+            count={masteredCount}
+          />
+          <ProgressBar
+            type={ProgressType.Reviewing}
+            colorType={isTitleSide ? ColorType.Gray : ColorType.White}
+            total={words.length}
+            count={reviewingCount}
+          />
+          <ProgressBar
+            type={ProgressType.Learning}
+            colorType={isTitleSide ? ColorType.Gray : ColorType.White}
+            total={words.length}
+            count={learningCount}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }

@@ -15,8 +15,14 @@ export default function CategoryChips({
   setSelectedCategoryId,
 }: Props) {
   return (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-      <View className="mt-2 flex flex-row gap-x-2">
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      className="mt-2 flex"
+      style={{ maxHeight: 32 }}
+      contentContainerStyle={{ justifyContent: "flex-start" }}
+    >
+      <View className="flex flex-row gap-x-2">
         <TouchableHighlight
           onPress={() => setSelectedCategoryId(-1)}
           underlayColor="white"

@@ -1,6 +1,6 @@
 import { Skeleton } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import getAllCategories from "../../lib/categories/get-all-categories";
 import getAllPhases from "../../lib/phases/get-all-phases";
 import getAllWordInfo from "../../lib/progress/get-all-word-info";
@@ -54,43 +54,49 @@ export default function HomeMainPanel({ navigation }: any) {
   if (filteredWordInfoList.length !== phases.length) return;
 
   return (
-    <View className="mt-12 flex flex-col items-center justify-center rounded-2xl bg-white px-4 py-6">
-      <Text className="font-dm-bold text-[28px]">Vocab being learned</Text>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      className="absolute h-screen w-full"
+    >
+      <View className="h-[300px]"></View>
+      <View className="flex flex-col items-center rounded-2xl bg-white px-4 py-6">
+        <Text className="font-dm-bold text-[28px]">Vocab being learned</Text>
 
-      {isLoading ? (
-        <Skeleton
-          height={240}
-          style={{
-            borderRadius: 10,
-            marginTop: 16,
-            width: "95%",
-            opacity: 0.2,
-          }}
-        />
-      ) : (
-        <>
-          <CategoryChips
-            categories={categories}
-            selectedCategoryId={selectedCategoryId}
-            setSelectedCategoryId={setSelectedCategoryId}
+        {isLoading ? (
+          <Skeleton
+            height={240}
+            style={{
+              borderRadius: 10,
+              marginTop: 16,
+              width: "95%",
+              opacity: 0.2,
+            }}
           />
-          {phases.length > 0 ? (
-            <>
-              {phases.map((phase, index) => (
-                <CourseCard
-                  key={index}
-                  navigation={navigation}
-                  categoryId={selectedCategoryId}
-                  phase={phase}
-                  wordInfoList={filteredWordInfoList[index]}
-                />
-              ))}
-            </>
-          ) : (
-            <Text>No courses for this category.</Text>
-          )}
-        </>
-      )}
-    </View>
+        ) : (
+          <>
+            <CategoryChips
+              categories={categories}
+              selectedCategoryId={selectedCategoryId}
+              setSelectedCategoryId={setSelectedCategoryId}
+            />
+            {phases.length > 0 ? (
+              <>
+                {phases.map((phase, index) => (
+                  <CourseCard
+                    key={index}
+                    navigation={navigation}
+                    categoryId={selectedCategoryId}
+                    phase={phase}
+                    wordInfoList={filteredWordInfoList[index]}
+                  />
+                ))}
+              </>
+            ) : (
+              <Text>No courses for this category.</Text>
+            )}
+          </>
+        )}
+      </View>
+    </ScrollView>
   );
 }
