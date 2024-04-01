@@ -1,3 +1,4 @@
+import { Skeleton } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import getAllCategories from "../../lib/categories/get-all-categories";
@@ -16,19 +17,7 @@ export default function HomeMainPanel({ navigation }: any) {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>(-1);
-  const [isLoadingPhases, setIsLoadingPhases] = useState<boolean>(false);
-
-  useEffect(() => {
-    const run = async () => {
-      try {
-        const wordInfoList = await getAllWordInfo();
-        setWordInfoList(wordInfoList);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    run();
-  }, []);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const run = async () => {
@@ -37,8 +26,12 @@ export default function HomeMainPanel({ navigation }: any) {
         setCategories(categories);
         const phases = await getAllPhases();
         setPhases(phases);
+        const wordInfoList = await getAllWordInfo();
+        setWordInfoList(wordInfoList);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     run();
@@ -63,27 +56,35 @@ export default function HomeMainPanel({ navigation }: any) {
   return (
     <View className="mt-12 flex flex-col items-center justify-center rounded-2xl bg-white px-4 py-6">
       <Text className="font-dm-bold text-[28px]">Vocab being learned</Text>
-      <CategoryChips
-        categories={categories}
-        selectedCategoryId={selectedCategoryId}
-        setSelectedCategoryId={setSelectedCategoryId}
-      />
-      {isLoadingPhases ? (
-        <Text>Loading...</Text>
-      ) : phases.length > 0 ? (
-        <>
-          {phases.map((phase, index) => (
-            <CourseCard
-              key={index}
-              navigation={navigation}
-              categoryId={selectedCategoryId}
-              phase={phase}
-              wordInfoList={filteredWordInfoList[index]}
-            />
-          ))}
-        </>
+
+      {isLoading ? (
+        <Skeleton
+          height={320}
+          style={{ borderRadius: 10, marginTop: 16, width: "90%" }}
+        />
       ) : (
-        <Text>No courses for this category.</Text>
+        <>
+          <CategoryChips
+            categories={categories}
+            selectedCategoryId={selectedCategoryId}
+            setSelectedCategoryId={setSelectedCategoryId}
+          />
+          {phases.length > 0 ? (
+            <>
+              {phases.map((phase, index) => (
+                <CourseCard
+                  key={index}
+                  navigation={navigation}
+                  categoryId={selectedCategoryId}
+                  phase={phase}
+                  wordInfoList={filteredWordInfoList[index]}
+                />
+              ))}
+            </>
+          ) : (
+            <Text>No courses for this category.</Text>
+          )}
+        </>
       )}
     </View>
   );
