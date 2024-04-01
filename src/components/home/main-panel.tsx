@@ -59,8 +59,13 @@ export default function HomeMainPanel({ navigation }: any) {
 
       {isLoading ? (
         <Skeleton
-          height={320}
-          style={{ borderRadius: 10, marginTop: 16, width: "90%" }}
+          height={240}
+          style={{
+            borderRadius: 10,
+            marginTop: 16,
+            width: "95%",
+            opacity: 0.2,
+          }}
         />
       ) : (
         <>
