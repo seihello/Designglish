@@ -81,7 +81,7 @@ export default function HomeMainPanel({ navigation }: any) {
       className="absolute h-screen w-full"
     >
       <View className="h-[300px]"></View>
-      <View className="flex flex-col items-center rounded-2xl bg-white px-4 py-6">
+      <View className="flex flex-col items-center rounded-[40px] bg-white px-4 py-6">
         <Text className="font-dm-bold text-[28px]">Vocab being learned</Text>
 
         {isLoadingDefinition || isLoadingWordInfo ? (
