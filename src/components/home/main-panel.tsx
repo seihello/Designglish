@@ -1,7 +1,7 @@
 import { useIsFocused } from "@react-navigation/native";
 import { Skeleton } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import getAllCategories from "../../lib/categories/get-all-categories";
 import getAllPhases from "../../lib/phases/get-all-phases";
 import getAllWordInfo from "../../lib/progress/get-all-word-info";
@@ -9,7 +9,6 @@ import Category from "../../types/category.type";
 import Phase from "../../types/phase.type";
 import WordInfo from "../../types/word-info.type";
 import Text from "../ui/text";
-import CategoryChips from "./category-chips";
 import CourseCard from "./course-card";
 
 export default function HomeMainPanel({ navigation }: any) {
@@ -63,12 +62,7 @@ export default function HomeMainPanel({ navigation }: any) {
   const filteredWordInfoList: Array<Array<WordInfo>> = [];
   for (let i = 0; i < phases.length; i++) {
     filteredWordInfoList.push(
-      wordInfoList.filter(
-        (wordInfo) =>
-          (selectedCategoryId === -1 ||
-            wordInfo.categoryIds.includes(selectedCategoryId)) &&
-          wordInfo.phaseIds.includes(i),
-      ),
+      wordInfoList.filter((wordInfo) => wordInfo.phaseIds.includes(i)),
     );
   }
 
@@ -76,50 +70,38 @@ export default function HomeMainPanel({ navigation }: any) {
   if (filteredWordInfoList.length !== phases.length) return;
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      className="absolute h-screen w-full"
-    >
-      <View className="h-[300px]"></View>
-      <View className="flex flex-col items-center rounded-[40px] bg-white px-4 py-6">
-        <Text className="font-dm-bold text-[28px]">Vocab being learned</Text>
-
-        {isLoadingDefinition || isLoadingWordInfo ? (
-          <Skeleton
-            height={240}
-            style={{
-              borderRadius: 10,
-              marginTop: 16,
-              width: "95%",
-              opacity: 0.2,
-            }}
-          />
-        ) : (
-          <>
-            <CategoryChips
-              categories={categories}
-              selectedCategoryId={selectedCategoryId}
-              setSelectedCategoryId={setSelectedCategoryId}
-            />
-            {phases.length > 0 ? (
-              <View className="mt-2 w-full">
-                {phases.map((phase, index) => (
-                  <CourseCard
-                    key={index}
-                    navigation={navigation}
-                    categoryId={selectedCategoryId}
-                    phase={phase}
-                    wordInfoList={filteredWordInfoList[index]}
-                    setIsLoadingWordInfo={setIsLoadingWordInfo}
-                  />
-                ))}
-              </View>
-            ) : (
-              <Text>No courses for this category.</Text>
-            )}
-          </>
-        )}
-      </View>
-    </ScrollView>
+    <View className="flex flex-col items-center rounded-[40px] bg-white px-4 py-6">
+      <Text className="font-dm-bold text-[28px]">Vocab being learned</Text>
+      {isLoadingDefinition || isLoadingWordInfo ? (
+        <Skeleton
+          height={240}
+          style={{
+            borderRadius: 10,
+            marginTop: 16,
+            width: "95%",
+            opacity: 0.2,
+          }}
+        />
+      ) : (
+        <>
+          {phases.length > 0 ? (
+            <View className="mt-2 w-full">
+              {phases.map((phase, index) => (
+                <CourseCard
+                  key={index}
+                  navigation={navigation}
+                  categoryId={selectedCategoryId}
+                  phase={phase}
+                  wordInfoList={filteredWordInfoList[index]}
+                  setIsLoadingWordInfo={setIsLoadingWordInfo}
+                />
+              ))}
+            </View>
+          ) : (
+            <Text>No courses for this category.</Text>
+          )}
+        </>
+      )}
+    </View>
   );
 }
