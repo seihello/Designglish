@@ -70,8 +70,8 @@ export default function HomeMainPanel({ navigation }: any) {
   if (filteredWordInfoList.length !== phases.length) return;
 
   return (
-    <View className="flex flex-col items-center rounded-[40px] bg-white px-4 py-6">
-      <Text className="font-dm-bold text-[28px]">Vocab being learned</Text>
+    <View className="flex flex-col items-center rounded-[40px] bg-white px-5 pb-8 pt-2">
+      <Text className="my-6 font-dm-bold text-[28px]">Vocab being learned</Text>
       {isLoadingDefinition || isLoadingWordInfo ? (
         <Skeleton
           height={240}

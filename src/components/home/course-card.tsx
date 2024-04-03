@@ -52,7 +52,7 @@ export default function CourseCard({
   ).length;
 
   return (
-    <View className="mt-2">
+    <View className="mb-4 flex h-[90px] flex-col">
       <TouchableHighlight
         onPress={() => {
           setTimeout(() => {
@@ -65,9 +65,9 @@ export default function CourseCard({
         }}
         onLongPress={reset}
         underlayColor="white"
-        className="w-full"
+        className="h-full w-full grow"
       >
-        <View className="mt-2 flex w-full flex-row items-center overflow-hidden rounded-xl bg-primary-100">
+        <View className="flex w-full grow flex-row items-center justify-between overflow-hidden rounded-xl border border-primary-300 bg-primary-100">
           <Image
             source={
               phase.id === 1
@@ -80,34 +80,39 @@ export default function CourseCard({
                       ? PHASE_IMAGES[4]
                       : PHASE_IMAGES[5]
             }
+            className="h-full"
           />
-          <View className="flex flex-1 flex-col  p-4">
-            <Text className="font-dm-bold text-lg">{phase.name}</Text>
-            <View className="mt-2 flex flex-row justify-between">
-              <Text className="font-roboto text-xs text-gray-700">
-                {masteredCount}/{wordInfoList.length} mastered
-              </Text>
-              <Text className="font-roboto text-xs text-gray-700">
-                {wordInfoList.length === 0
-                  ? 0
-                  : Math.round((masteredCount / wordInfoList.length) * 100)}
-                %
-              </Text>
+          <View className="flex w-1 grow flex-row items-center justify-between gap-x-3 py-2 pl-4 pr-3">
+            <View className="flex grow flex-col">
+              <Text className="font-dm-bold text-lg">{phase.name}</Text>
+              <View className="mt-1 flex flex-row justify-between">
+                <Text className="font-roboto text-xs text-gray-700">
+                  {masteredCount}/{wordInfoList.length} mastered
+                </Text>
+                <Text className="font-roboto text-xs text-gray-700">
+                  {wordInfoList.length === 0
+                    ? 0
+                    : Math.round((masteredCount / wordInfoList.length) * 100)}
+                  %
+                </Text>
+              </View>
+              <View className="mt-1 w-full overflow-hidden rounded-full border-[1px] border-gray-200 bg-white text-xs">
+                <View
+                  className="h-2 bg-primary-900"
+                  style={{
+                    width: `${
+                      wordInfoList.length === 0
+                        ? 0
+                        : Math.round(
+                            (masteredCount / wordInfoList.length) * 100,
+                          )
+                    }%`,
+                  }}
+                ></View>
+              </View>
             </View>
-            <View className="w-full overflow-hidden rounded-full border-[1px] border-gray-200 bg-white text-xs">
-              <View
-                className="h-2 bg-primary-900"
-                style={{
-                  width: `${
-                    wordInfoList.length === 0
-                      ? 0
-                      : Math.round((masteredCount / wordInfoList.length) * 100)
-                  }%`,
-                }}
-              ></View>
-            </View>
+            <Icon name="chevron-right" color="#239CAC" size={32} />
           </View>
-          <Icon name="chevron-right" color="#239CAC" size={32} />
         </View>
       </TouchableHighlight>
     </View>
