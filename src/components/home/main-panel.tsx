@@ -4,6 +4,7 @@ import { View } from "react-native";
 import getAllCategories from "../../lib/categories/get-all-categories";
 import getAllPhases from "../../lib/phases/get-all-phases";
 import getAllWordInfo from "../../lib/progress/get-all-word-info";
+import getWordProgress from "../../lib/progress/get-word-progress";
 import Category from "../../types/category.type";
 import Phase from "../../types/phase.type";
 import WordInfo from "../../types/word-info.type";
@@ -19,8 +20,10 @@ export default function HomeMainPanel({ navigation }: any) {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>(-1);
-  const [isLoadingDefinition, setIsLoadingDefinition] = useState<boolean>(true);
-  const [isLoadingWordInfo, setIsLoadingWordInfo] = useState<boolean>(true);
+  const [isLoadingInitialData, setIsLoadingInitialData] =
+    useState<boolean>(true);
+  const [isLoadingProgress, setIsLoadingProgress] = useState<boolean>(false);
+  const [workingPhaseId, setWorkingPhaseId] = useState<number>();
 
   useEffect(() => {
     const run = async () => {
@@ -29,10 +32,12 @@ export default function HomeMainPanel({ navigation }: any) {
         setCategories(categories);
         const phases = await getAllPhases();
         setPhases(phases);
+        const wordInfoList = await getAllWordInfo();
+        setWordInfoList(wordInfoList);
       } catch (error) {
         console.error(error);
       } finally {
-        setIsLoadingDefinition(false);
+        setIsLoadingInitialData(false);
       }
     };
     run();
@@ -40,18 +45,21 @@ export default function HomeMainPanel({ navigation }: any) {
 
   useEffect(() => {
     const run = async () => {
-      if (isFocused) {
+      if (isFocused && workingPhaseId !== undefined) {
         try {
-          const categories = await getAllCategories();
-          setCategories(categories);
-          const phases = await getAllPhases();
-          setPhases(phases);
-          const wordInfoList = await getAllWordInfo();
-          setWordInfoList(wordInfoList);
+          const newWordInfoList = [...wordInfoList];
+          for (const newWordInfo of wordInfoList) {
+            if (newWordInfo.phaseIds.includes(workingPhaseId)) {
+              console.log("get new progress");
+              const newProgress = await getWordProgress(newWordInfo.id);
+              newWordInfo.progress = newProgress;
+            }
+          }
+          setWordInfoList(newWordInfoList);
         } catch (error) {
           console.error(error);
         } finally {
-          setIsLoadingWordInfo(false);
+          setIsLoadingProgress(false);
         }
       }
     };
@@ -72,7 +80,7 @@ export default function HomeMainPanel({ navigation }: any) {
   return (
     <View className="flex flex-col items-center rounded-[40px] bg-white px-5 pb-8 pt-2">
       <Text className="my-6 font-dm-bold text-[28px]">Vocab being learned</Text>
-      {isLoadingDefinition || isLoadingWordInfo ? (
+      {isLoadingInitialData ? (
         <CourseCardsSkeleton />
       ) : (
         <>
@@ -85,7 +93,7 @@ export default function HomeMainPanel({ navigation }: any) {
                   categoryId={selectedCategoryId}
                   phase={phase}
                   wordInfoList={filteredWordInfoList[index]}
-                  setIsLoadingWordInfo={setIsLoadingWordInfo}
+                  setWorkingPhaseId={setWorkingPhaseId}
                 />
               ))}
             </View>
