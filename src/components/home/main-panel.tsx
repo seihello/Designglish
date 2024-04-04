@@ -1,5 +1,4 @@
 import { useIsFocused } from "@react-navigation/native";
-import { Skeleton } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import getAllCategories from "../../lib/categories/get-all-categories";
@@ -10,6 +9,7 @@ import Phase from "../../types/phase.type";
 import WordInfo from "../../types/word-info.type";
 import Text from "../ui/text";
 import CourseCard from "./course-card";
+import CourseCardsSkeleton from "./course-cards-skeleton";
 
 export default function HomeMainPanel({ navigation }: any) {
   const isFocused = useIsFocused();
@@ -73,15 +73,7 @@ export default function HomeMainPanel({ navigation }: any) {
     <View className="flex flex-col items-center rounded-[40px] bg-white px-5 pb-8 pt-2">
       <Text className="my-6 font-dm-bold text-[28px]">Vocab being learned</Text>
       {isLoadingDefinition || isLoadingWordInfo ? (
-        <Skeleton
-          height={240}
-          style={{
-            borderRadius: 10,
-            marginTop: 16,
-            width: "95%",
-            opacity: 0.2,
-          }}
-        />
+        <CourseCardsSkeleton />
       ) : (
         <>
           {phases.length > 0 ? (
