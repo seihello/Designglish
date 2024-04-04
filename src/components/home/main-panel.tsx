@@ -50,7 +50,6 @@ export default function HomeMainPanel({ navigation }: any) {
           const newWordInfoList = [...wordInfoList];
           for (const newWordInfo of wordInfoList) {
             if (newWordInfo.phaseIds.includes(workingPhaseId)) {
-              console.log("get new progress");
               const newProgress = await getWordProgress(newWordInfo.id);
               newWordInfo.progress = newProgress;
             }
