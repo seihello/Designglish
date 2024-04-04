@@ -1,11 +1,13 @@
 import React from "react";
 import { Alert, Image, TouchableHighlight, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import ProgressType from "../../../enums/progress-type";
 import Progress from "../../enum/progress.enum";
 import resetWordProgress from "../../lib/progress/reset-word-progress";
 import Phase from "../../types/phase.type";
 import WordInfo from "../../types/word-info.type";
 import Text from "../ui/text";
+import ProgressBar, { ColorType } from "../word/progress-bar";
 
 const PHASE_IMAGES = {
   1: require(`../../../assets/img/phases/1.png`),
@@ -83,31 +85,12 @@ export default function CourseCard({
           <View className="flex w-1 grow flex-row items-center justify-between gap-x-3 py-2 pl-4 pr-3">
             <View className="flex grow flex-col">
               <Text className="font-dm-bold text-lg">{phase.name}</Text>
-              <View className="mt-1 flex flex-row justify-between">
-                <Text className="font-roboto text-xs text-gray-700">
-                  {masteredCount}/{wordInfoList.length} mastered
-                </Text>
-                <Text className="font-roboto text-xs text-gray-700">
-                  {wordInfoList.length === 0
-                    ? 0
-                    : Math.round((masteredCount / wordInfoList.length) * 100)}
-                  %
-                </Text>
-              </View>
-              <View className="mt-1 w-full overflow-hidden rounded-full border-[1px] border-gray-200 bg-white text-xs">
-                <View
-                  className="h-2 bg-primary-900"
-                  style={{
-                    width: `${
-                      wordInfoList.length === 0
-                        ? 0
-                        : Math.round(
-                            (masteredCount / wordInfoList.length) * 100,
-                          )
-                    }%`,
-                  }}
-                ></View>
-              </View>
+              <ProgressBar
+                type={ProgressType.Mastered}
+                colorType={ColorType.White}
+                total={wordInfoList.length}
+                count={masteredCount}
+              />
             </View>
             <Icon name="chevron-right" color="#239CAC" size={32} />
           </View>
