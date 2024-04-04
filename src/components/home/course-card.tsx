@@ -80,7 +80,7 @@ export default function CourseCard({
                       ? PHASE_IMAGES[4]
                       : PHASE_IMAGES[5]
             }
-            className="h-full"
+            className="h-[90px] w-[90px]"
           />
           <View className="flex w-1 grow flex-row items-center justify-between gap-x-3 py-2 pl-4 pr-3">
             <View className="flex grow flex-col">
