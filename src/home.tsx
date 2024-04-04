@@ -9,7 +9,7 @@ export default function HomePage(props: any) {
       <View className="relative flex h-48 flex-col justify-center">
         <Image
           source={require("../assets/mv.png")}
-          className="absolute right-8 top-8"
+          className="absolute right-8 top-8 h-[45vw] w-[50vw]"
         />
         {/* <View className="flex flex-row justify-end p-4">
           <View className="flex flex-col">
@@ -18,14 +18,14 @@ export default function HomePage(props: any) {
             </View>
           </View>
         </View> */}
-        <View className="top-18 absolute left-12 w-[180px]">
+        <View className="absolute left-12 top-20 w-[180px]">
           <View className="flex h-12 flex-col justify-center">
             <Text className="font-dm-bold text-[32px] text-white">
               {/* Welcome, Lisa! */}
               Hi!
             </Text>
           </View>
-          <Text className="font-dm-bold text-lg leading-[20.83px] text-white">
+          <Text className="mt-2 font-dm-bold text-lg leading-[20.83px] text-white">
             What do you want to learn today?
           </Text>
         </View>
@@ -34,7 +34,7 @@ export default function HomePage(props: any) {
         showsVerticalScrollIndicator={false}
         className="absolute h-screen w-full"
       >
-        <View className="flex w-full flex-col min-h-screen">
+        <View className="flex min-h-screen w-full flex-col">
           <View className="min-h-[280px] grow"></View>
           <HomeMainPanel navigation={props.navigation} />
         </View>
