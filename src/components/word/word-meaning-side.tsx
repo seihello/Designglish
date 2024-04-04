@@ -43,12 +43,16 @@ export default function WordMeaningSide({
         await updateProgress(word.id, Progress.Learning);
         break;
       case Progress.Learning:
+        break;
       case Progress.Reviewing:
-      // do nothing
+        await updateProgress(word.id, Progress.Learning);
+        break;
       case Progress.Mastered:
+        await updateProgress(word.id, Progress.Reviewing);
+        break;
       default:
         // do nothing
-        // Mastered words should not disappear
+        // Mastered words should not disappear?
         break;
     }
     toNext();
