@@ -1,16 +1,18 @@
 import React from "react";
-import { Image, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import HomeMainPanel from "./components/home/main-panel";
+import Mv from "./components/home/mv";
 import Text from "./components/ui/text";
 
 export default function HomePage(props: any) {
   return (
     <View className="flex h-screen w-full flex-col justify-between bg-primary-900 pt-16">
       <View className="relative flex h-48 flex-col justify-center">
-        <Image
+        {/* <Image
           source={require("../assets/mv.png")}
           className="absolute right-8 top-8 h-[45vw] w-[50vw]"
-        />
+        /> */}
+        <Mv className="absolute right-0 top-2 scale-[0.8]" />
         {/* <View className="flex flex-row justify-end p-4">
           <View className="flex flex-col">
             <View className="flex items-center justify-center rounded-full bg-white p-1">
