@@ -90,6 +90,7 @@ export default function CourseCard({
                 colorType={ColorType.White}
                 total={wordInfoList.length}
                 count={masteredCount}
+                isHome={true}
               />
             </View>
             <Icon name="chevron-right" color="#239CAC" size={32} />

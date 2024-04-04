@@ -128,18 +128,21 @@ export default function WordPage({ navigation, route }: any) {
             colorType={isTitleSide ? ColorType.Gray : ColorType.White}
             total={words.length}
             count={masteredCount}
+            isHome={false}
           />
           <ProgressBar
             type={ProgressType.Reviewing}
             colorType={isTitleSide ? ColorType.Gray : ColorType.White}
             total={words.length}
             count={reviewingCount}
+            isHome={false}
           />
           <ProgressBar
             type={ProgressType.Learning}
             colorType={isTitleSide ? ColorType.Gray : ColorType.White}
             total={words.length}
             count={learningCount}
+            isHome={false}
           />
         </View>
       </View>

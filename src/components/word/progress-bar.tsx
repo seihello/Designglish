@@ -13,9 +13,16 @@ type Props = {
   count: number;
   total: number;
   colorType: ColorType;
+  isHome: boolean;
 };
 
-export default function ProgressBar({ type, total, count, colorType }: Props) {
+export default function ProgressBar({
+  type,
+  total,
+  count,
+  colorType,
+  isHome,
+}: Props) {
   const transitWidth = useRef(
     new Animated.Value(Math.round((count / total) * 100)),
   ).current;
@@ -42,7 +49,7 @@ export default function ProgressBar({ type, total, count, colorType }: Props) {
           : "";
 
   return (
-    <View className="mt-4">
+    <View className={isHome ? "mt-1" : "mt-4"}>
       <View className="flex flex-row justify-between">
         <Text className="font-roboto text-xs text-gray-700">{`${count}/${total} ${type.toString()}`}</Text>
         <Text className="font-roboto text-xs text-gray-700">{`${Math.round(
