@@ -9,11 +9,12 @@ type Props = {
 };
 
 export default function Button({ title, onPress, className, ...rest }: Props) {
-
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={"flex w-full items-center justify-center rounded-full py-2".concat(className || "")}
+      className={"flex h-12 w-full items-center justify-center rounded-full".concat(
+        className || "",
+      )}
       activeOpacity={0.8}
       {...rest}
     >

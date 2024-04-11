@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "./src/home";
+import InitPage from "./src/init";
 import WordPage from "./src/word";
 
 const Stack = createNativeStackNavigator();
@@ -25,7 +26,19 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Init">
+        <Stack.Screen
+          name="Init"
+          component={InitPage}
+          options={{
+            headerShown: false,
+            // title: "",
+            // headerStyle: {
+            //   backgroundColor: "#239CAC",
+            // },
+            // headerShadowVisible: false,
+          }}
+        />
         <Stack.Screen
           name="Home"
           component={HomePage}
