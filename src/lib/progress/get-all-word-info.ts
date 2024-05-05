@@ -7,7 +7,8 @@ export default async function getAllWordInfo(): Promise<WordInfo[]> {
   try {
     const wordInfoListRes = await supabase
       .from("words")
-      .select("id, word_categories(category_id), word_phases(phase_id)");
+      .select("id, word_categories(category_id), word_phases(phase_id)")
+      .eq("enable", true);
 
     if (wordInfoListRes.error) {
       throw new Error(wordInfoListRes.error.message);

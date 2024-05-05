@@ -8,7 +8,8 @@ export default async function getCourseWords(phaseId: number): Promise<Word[]> {
     const phaseWordIdsRes = await supabase
       .from("word_phases")
       .select("word_id")
-      .eq("phase_id", phaseId);
+      .eq("phase_id", phaseId)
+      .eq("enable", true);
 
     if (!phaseWordIdsRes.data || phaseWordIdsRes.data.length === 0) {
       throw new Error(
