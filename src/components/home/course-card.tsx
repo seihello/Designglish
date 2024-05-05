@@ -70,13 +70,13 @@ export default function CourseCard({
         <View className="flex w-full grow flex-row items-center justify-between overflow-hidden rounded-xl border border-primary-300 bg-primary-100">
           <Image
             source={
-              phase.id === 1
+              phase.id === 0
                 ? PHASE_IMAGES[1]
-                : phase.id === 2
+                : phase.id === 1
                   ? PHASE_IMAGES[2]
-                  : phase.id === 3
+                  : phase.id === 2
                     ? PHASE_IMAGES[3]
-                    : phase.id === 4
+                    : phase.id === 3
                       ? PHASE_IMAGES[4]
                       : PHASE_IMAGES[5]
             }
