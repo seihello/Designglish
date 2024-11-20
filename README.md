@@ -10,7 +10,7 @@ A mobile application for learning English vocabulary used by web designers.
 - PostgreSQL
 - Supabase
 
-[![My Skills](https://skillicons.dev/icons?i=ts,react,tailwind,postgres,supabase)](https://skillicons.dev)
+[![Technology](https://skillicons.dev/icons?i=ts,react,tailwind,postgres,supabase)](https://skillicons.dev)
 
 ## Setup
 1. Update version in app.json
